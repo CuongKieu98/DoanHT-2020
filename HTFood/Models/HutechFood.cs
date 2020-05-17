@@ -32,6 +32,7 @@ namespace HTFood.Models
         public int MaKH { get; set; }
         public int MaNV { get; set; }
         public int MaVT { get; set; }
+        public int MaCH { get; set; }
     }
     public class ChiTietDonHang
     {

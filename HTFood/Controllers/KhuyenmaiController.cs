@@ -95,6 +95,7 @@ namespace HTFood.Controllers
                 }
                 //DoAn doAn = listda.Where(n => n.MaDA == );
                 ViewBag.nameDa = dsTen;
+
                 return View(chitietkms.ToList());
             }
             return View();

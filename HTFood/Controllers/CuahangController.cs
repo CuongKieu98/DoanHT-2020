@@ -84,7 +84,14 @@ namespace HTFood.Controllers
                 listkm = listkm.Where(n => n.MaCH == id).ToList();
                 ViewBag.sale = listkm;      
                 ViewBag.CountSale = listkm.Count;
+                //don hang
+                responseMessage = await client.GetAsync(url + @"DonDatHang/");
+                List<DonDatHang> listddh = DonDatHangController.getAllOrder(responseMessage);
+                listddh = listddh.Where(n => n.MaKH == id).ToList();
+                ViewBag.Donhang = listddh;
+                ViewBag.CountOrders = listddh.Count;
                 //sasa
+
 
 
 
