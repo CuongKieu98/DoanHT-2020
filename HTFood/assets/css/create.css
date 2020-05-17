@@ -1,0 +1,54 @@
+﻿
+.container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.col-md-6 {
+    width: 100%;
+}
+
+.userbox input[type=email], .userbox input[type=password], .userbox input[type=text], .userbox input[type=date] {
+    width: 100%;
+    height: 55px;
+    border: 1px solid transparent;
+    background: #ededed;
+    color: #000000;
+    padding: 0 20px;
+    font-weight: 500;
+    -webkit-appearance: none;
+    border-radius:13px;
+}
+
+.userbox {
+    border-radius: 13px;
+    margin-left: 10px;
+}
+
+input.btn.btn-raised.bg-light-blue.waves-effect {
+    border-radius: 5px;
+}
+
+input.datetime {
+    margin: 15px 0px
+}
+
+input.text {
+    margin: 15px 0
+}
+div#input-text {
+    margin: 15px 0;
+}
+
+.col-sm-12 {
+    padding-left: 0px;
+}
+
+span.icon-name {
+    position: relative;
+    top: 8px;
+}
+
+

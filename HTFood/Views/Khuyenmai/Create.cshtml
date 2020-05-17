@@ -1,0 +1,124 @@
+﻿@model HTFood.Models.Khuyenmai
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-7">
+                    <h2>Sản phẩm</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Tạo Khuyến mãi</li>
+                    </ul>
+                </div>
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="body">
+                    <form id="form_advanced_validation" method="POST" novalidate="novalidate">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input class="form-control" id="TenKM" name="TenKM" type="text" value="" placeholder="Tên khuyến mãi..">
+
+                                        @Html.ValidationMessageFor(model => model.TenKM, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="help-info">Tên khuyến mãi</div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-6">
+                                <h2 class="card-inside-title">Trạng thái:</h2>
+                                <div class="demo-radio-button">
+                                    <input name="group1" type="radio" id="radio_1" checked="">
+                                    <label for="radio_1"><span class="badge bg-green">Active</span></label>
+                                    <input name="group1" type="radio" id="radio_2">
+                                    <label for="radio_2"><span class="badge bg-grey">Close</span></label>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row clearfix">
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+
+
+                                        <input class="form-control" id="TgBatDau" name="TgBatDau" type="date" value="" placeholder="Ngày bắt đầu..">
+
+                                        @Html.ValidationMessageFor(model => model.TgBatDau, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="help-info">Bắt đầu</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input class="form-control" id="TgKetThuc" name="TgKetThuc" type="date" value="" placeholder="Ngày kết thúc..">
+
+                                        @Html.ValidationMessageFor(model => model.TgKetThuc, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="help-info">Kết thúc</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group form-float">
+                                    <div class="form-line">
+                                        <input class="form-control" id="MaCH" name="MaCH" type="number" value="" placeholder="Cửa hàng..">
+                                        @* @Html.DropDownList("MaCH")*@
+                                        @Html.ValidationMessageFor(model => model.MaCH, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="help-info">Cửa hàng</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row clearfix">
+
+                            <div class="col-sm-12">
+                                <h2 class="card-inside-title">Mô tả khuyến mãi:</h2>
+                                <textarea name="MotaKM" id="MotaKM">Nội dung...</textarea>
+                                <script>
+                                    CKEDITOR.replace('MotaKM');
+                                    CKFinder.setupCKEditor(null, '/ckfinder');
+                                </script>
+                                @Html.ValidationMessageFor(model => model.MotaKM, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--sasa-->
+                        <!--Default date and time picker -->
+                        <!--sasa-->
+                        <button class="btn btn-raised btn-primary waves-effect" type="submit">Thêm mới</button>
+                    </form>
+
+
+                </div>
+
+            }
+        </div>
+        </div>
+    </section>
+
+            <div>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+
+

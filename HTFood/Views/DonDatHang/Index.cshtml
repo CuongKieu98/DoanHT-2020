@@ -1,0 +1,505 @@
+﻿
+@model IEnumerable<HTFood.Models.DonDatHang>
+@using HTFood.Models
+@{
+    ViewBag.Title = "Dondathang";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<title>Danh sách đơn hàng</title>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <!--Header-->
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-7">
+                    <h2>Đơn hàng</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Đơn đặt hàng</li>
+                    </ul>
+                </div>
+            </div>
+            <!--/Header-->
+            <!--HHH-->
+            <div class="row clearfix">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#home_animation_1">Tất cả đơn hàng</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages_animation_1">Đang xử lý</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages_animation_2">Đang giao hàng</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages_animation_3">Đã giao hàng</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages_animation_4">Đơn hàng bị hủy</a></li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane animated flipInX active show" id="home_animation_1">
+                                    <h7>
+                                        @Html.ActionLink("Thêm mới đơn hàng", "Create")
+                                    </h7>
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    @{int i = 1;}
+                                                    @foreach (var item in Model)
+                                                    {
+
+
+
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <td> @Html.DisplayFor(modelItem => item.MaDonHang)</td>
+                                                            <td>
+                                                                @{
+                                                                    string message = "";
+                                                                    if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_CONFIRM)
+                                                                    {
+                                                                        message = MessageContants.STATUS_ORDER_CONFIRM;
+                                                                        <span class="badge bg-orange">
+                                                                            @Html.ActionLink(message, "Details", new { id = item.MaDonHang, maKH = item.MaKH }, new { @class = "text-color" })
+                                                                        </span>
+                                                                    }
+                                                                    else if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_DELIVERY)
+                                                                    {
+                                                                        message = MessageContants.STATUS_ORDER_DELIVERY;
+                                                                        <span class="badge bg-blue">
+                                                                            @Html.ActionLink(message, "Details", new { id = item.MaDonHang, maKH = item.MaKH }, new { @class = "text-color" })
+                                                                        </span>
+                                                                    }
+                                                                    else if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_DELIVERED)
+                                                                    {
+                                                                        message = MessageContants.STATUS_ORDER_DELIVERED;
+                                                                        <span class="badge bg-green">
+                                                                            @Html.ActionLink(message, "Details", new { id = item.MaDonHang, maKH = item.MaKH }, new { @class = "text-color" })
+                                                                        </span>
+                                                                    }
+                                                                    else if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_BOOM)
+                                                                    {
+                                                                        message = MessageContants.STATUS_ORDER_BOOM;
+                                                                        <span class="badge bg-red" >
+                                                                            @Html.ActionLink(message, "Details", new { id = item.MaDonHang, maKH = item.MaKH }, new { @class = "text-color" })
+                                                                        </span>
+                                                                    }
+                                                                }
+
+                                                            </td>
+                                                            <td>
+                                                                @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayDat).ToString())
+                                                            </td>
+                                                            <td>
+                                                                @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayGiao).ToString())
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.TgGiao) phút
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.MaKH)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.MaNV)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.MaVT)
+                                                            </td>
+                                                            <td>
+                                                                <a href="@Url.Action("Edit","DonDatHang",new { id = item.MaDonHang })"><img src="~/images/edit.png" /></a> ||
+                                                                <a href="@Url.Action("Delete","DonDatHang",new { id = item.MaDonHang })" onclick="return confirm('Bạn có chắc bạn muốn xóa mục này ?');" )><img src="~/images/trash.png" /></a>
+                                                            </td>
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane animated flipInX" id="messages_animation_1">
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    @{i = 1;}
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        string message = "";
+                                                        message = MessageContants.STATUS_ORDER_CONFIRM;
+
+                                                        if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_CONFIRM)
+                                                        {
+                                                            <tr>
+                                                                <td>@i</td>
+                                                                <td> @Html.DisplayFor(modelItem => item.MaDonHang)</td>
+                                                                <td>
+                                                                    <span class="badge bg-orange">
+                                                                       <c class="message"> @Html.ActionLink(@message, "Details", new { id = item.MaDonHang, maKH = item.MaKH},new { @class ="text-color"})</c>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayDat).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayGiao).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.TgGiao) phút
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaKH)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaNV)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaVT)
+                                                                </td>
+                                                                <td>
+                                                                    <a href="@Url.Action("Edit", "DonDatHang", new { id = item.MaDonHang })"><img src="~/images/edit.png" /></a> ||
+                                                                    <a href="@Url.Action("Delete", "DonDatHang", new { id = item.MaDonHang })" onclick="return confirm('Bạn có chắc bạn muốn xóa mục này ?');" )><img src="~/images/trash.png" /></a>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane animated flipInX" id="messages_animation_2">
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    @{i = 1;}
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        string message = "";
+                                                        message = MessageContants.STATUS_ORDER_DELIVERY;
+
+                                                        if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_DELIVERY)
+                                                        {
+                                                            <tr>
+                                                                <td>@i</td>
+                                                                <td> @Html.DisplayFor(modelItem => item.MaDonHang)</td>
+                                                                <td>
+                                                                    <span class="badge bg-blue">
+                                                                        @Html.ActionLink(message, "Details", new { id = item.MaDonHang, maKH = item.MaKH }, new { @class ="text-color"} )
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayDat).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayGiao).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.TgGiao)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaKH)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaNV)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaVT)
+                                                                </td>
+                                                                <td>
+                                                                    <a href="@Url.Action("Edit","DonDatHang",new { id = item.MaDonHang })"><img src="~/images/edit.png" /></a> ||
+                                                                    <a href="@Url.Action("Delete","DonDatHang",new { id = item.MaDonHang })" onclick="return confirm('Bạn có chắc bạn muốn xóa mục này ?');" )><img src="~/images/trash.png" /></a>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane animated flipInX" id="messages_animation_3">
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    @{i = 1;}
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        string message = "";
+                                                        message = MessageContants.STATUS_ORDER_DELIVERED;
+
+                                                        if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_DELIVERED)
+                                                        {
+                                                            <tr>
+                                                                <td>@i</td>
+                                                                <td> @Html.DisplayFor(modelItem => item.MaDonHang)</td>
+                                                                <td>
+                                                                    <span class="badge bg-green">
+                                                                        @Html.ActionLink(@message, "Details", new { id = item.MaDonHang, maKH = item.MaKH },new { @class ="text-color"})
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayDat).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayGiao).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.TgGiao) phút
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaKH)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaNV)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaVT)
+                                                                </td>
+                                                                <td>
+                                                                    <a href="@Url.Action("Edit","DonDatHang",new { id = item.MaDonHang })"><img src="~/images/edit.png" /></a> ||
+                                                                    <a href="@Url.Action("Delete","DonDatHang",new { id = item.MaDonHang })" onclick="return confirm('Bạn có chắc bạn muốn xóa mục này ?');" )><img src="~/images/trash.png" /></a>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane animated flipInX" id="messages_animation_4">
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã đơn</th>
+                                                        <th>Tình trạng đơn</th>
+                                                        <th>Ngày đặt</th>
+                                                        <th>Ngày giao</th>
+                                                        <th>Tg giao</th>
+                                                        <th>Mã khách hàng </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã vị trí</th>
+                                                        <th>Thao tác</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    @{i = 1;}
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        string message = "";
+                                                        message = MessageContants.STATUS_ORDER_BOOM;
+
+                                                        if (int.Parse(item.TinhTrangDonHang) == Constants.STATUS_ORDER_BOOM)
+                                                        {
+                                                            <tr>
+                                                                <td>@i</td>
+                                                                <td> @Html.DisplayFor(modelItem => item.MaDonHang)</td>
+                                                                <td>
+                                                                    <span class="badge bg-red">
+                                                                        <c style="        color: black">@Html.ActionLink(@message, "Details", new { StyleBundle = "", id = item.MaDonHang, maKH = item.MaKH },new { @class ="text-color"} )</c>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayDat).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @DateTime.Parse(Html.DisplayFor(modelItem => item.NgayGiao).ToString())
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.TgGiao) phút
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaKH)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaNV)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.MaVT)
+                                                                </td>
+                                                                <td>
+                                                                    <a href="@Url.Action("Edit","DonDatHang",new { id = item.MaDonHang })"><img src="~/images/edit.png" /></a> ||
+                                                                    <a href="@Url.Action("Delete","DonDatHang",new { id = item.MaDonHang })" onclick="return confirm('Bạn có chắc bạn muốn xóa mục này ?');" )><img src="~/images/trash.png" /></a>
+                                                                </td>
+                                                            </tr>
+                                                            i++;
+                                                        }
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--HH-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Jquery DataTable Plugin Js -->
+<script src="~/assets/js/buttons/libscripts.bundle.js"></script>
+<script src="~/assets/js/buttons/vendorscripts.bundle.js"></script>
+<script src="~/assets/js/buttons/datatablescripts.bundle.js"></script>
+<script src="~/assets/js/buttons/jquery-datatable.js"></script>
+
+<script type="text/javascript" charset="utf8">
+    $(document).ready(function () {
+        setTimeout(function () {
+            var listButton = $('.dataTables_length').find('button');
+            listButton.each(function () {
+                $(this).remove();
+            });
+        }, 500);
+    });
+</script>
+<style>
+    .text-color {
+        color: whitesmoke;
+    }
+</style>

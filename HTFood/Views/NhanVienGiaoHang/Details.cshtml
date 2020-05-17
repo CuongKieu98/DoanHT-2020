@@ -1,0 +1,232 @@
+﻿@model HTFood.Models.NhanVienGiaoHang
+@using HTFood.Models
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<link href="~/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+<title>Thông tin chi tiết nhân viên giao hàng</title>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <!--Header-->
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-7">
+                    <h2>Thông tin chi tiết nhân viên giao hàng</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","NhanVienGiaoHang")">Nhân viên giao hàng</a></li>
+                        <li class="breadcrumb-item active">@Html.DisplayFor(model => model.HoTenNV)</li>
+                    </ul>
+                </div>
+            </div>
+            <!--/Header-->
+            <!--content-->
+            <div class="row clearfix">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="header">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item"><a class="nav-link active show " data-toggle="tab" href="#home_animation">Thông tin</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#home_animation_1">Lịch sử giao hàng</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages_animation_1">Ghi chú</a></li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane animated flipInX active show" id="home_animation">
+                                    <div class="body">
+                                        <div class="row clearfix demo-icon-container">
+                                            <div class="well well-sm">
+                                                <h4>
+                                                    Thông tin cá nhân
+                                                </h4>
+                                                <div class="col-sm-12">
+                                                    <h5>
+                                                        @Html.DisplayFor(model => model.HoTenNV)
+                                                    </h5>
+                                                    <small style="color: #999;display: block;font-size: 13px;">
+                                                        <cite>
+                                                            @Html.DisplayFor(model => model.ViTriHienTai)
+                                                            <i class="demo-google-material-icon"> <i class="material-icons" style="font-size: initial">place</i> <span class="icon-name"></span></i>
+                                                        </cite>
+                                                    </small>
+                                                </div>
+                                                <div style="margin: 10px 0 0 0">
+                                                    <div class="col-sm-12">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">account_box</i><span class="icon-name"><b>Tài khoản: </b> @Html.DisplayFor(model => model.TaiKhoanNV)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">no_encryption</i><span class="icon-name"><b>Mật khẩu: </b>@Html.DisplayFor(model => model.MatKhauNV)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">email</i><span class="icon-name"><b>Email: </b>@Html.DisplayFor(model => model.EmailNV)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">phone</i><span class="icon-name"><b>Điện thoại: </b> (+84) @Html.DisplayFor(model => model.DienThoaiNV)</span> </div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">card_giftcard</i><span class="icon-name"><b>Ngày sinh: </b> @Html.DisplayFor(model => model.NgaySinhNV)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">pin_drop</i><span class="icon-name"><b>Địa chỉ: </b> @Html.DisplayFor(model => model.DiaChiNV)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">face</i><span class="icon-name"><b>Giới tính: </b> @Html.DisplayFor(model => model.GioiTinh)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"><i class="material-icons">visibility</i><span class="icon-name"><b>Trạng thái: </b> <c style="color:forestgreen;">@Html.DisplayFor(model => model.TrangThaiNV)</c></span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">account_balance_wallet</i><span class="icon-name"><b>Điểm thưởng: </b> @Html.DisplayFor(model => model.DiemThuong)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">priority_high</i><span class="icon-name"><b>Độ ưu tiên: </b> @Html.DisplayFor(model => model.DoUuTien)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="demo-google-material-icon"> <i class="material-icons">star_border</i><span class="icon-name"><b>Đánh giá: </b> @Html.DisplayFor(model => model.DanhGiaNVGH)</span></div>
+                                                    </div>
+                                                    <div class="col-sm-12 ">
+                                                        <div class="icon-button-demo">
+                                                            <a class="btn btn-raised bg-light-blue waves-effect" href="@Url.Action("Edit","NhanVienGiaoHang",new { id = Model.MaNV })"> <i class="material-icons">border_color</i> Chỉnh sửa</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane animated flipInX" id="home_animation_1">
+                                    <div class="body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã lịch sử </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã đơn hàng</th>
+                                                        <th>Thời gian giao hàng</th>
+                                                        <th>Trạng thái nhận đơn</th>
+                                                        <th>Tình trạng giao hàng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Mã lịch sử </th>
+                                                        <th>Mã nhân viên</th>
+                                                        <th>Mã đơn hàng</th>
+                                                        <th>Thời gian giao hàng</th>
+                                                        <th>Trạng thái nhận đơn</th>
+                                                        <th>Tình trạng giao hàng</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    @{int i = 1;}
+                                                    @foreach (LichSuNVGH item in ViewBag.lsnvgh)
+                                                    {
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <th> <a>@item.MaLS</a></th>
+                                                            <td>@item.MaNV</td>
+                                                            <td>@item.MaDonHang</td>
+                                                            @{ int time = item.TgGiao * Constants.timeShiper; }
+                                                            <td>@time phút</td>
+                                                            @{ string status = item.TrangThaiNhanDon ? MessageContants.STATUS_BILL_SUCCESSFUL : MessageContants.STATUS_BILL_FAIL;}
+                                                            <td><span class="badge bg-pink">@status</span></td>
+                                                            @{
+                                                                string message = "";
+                                                                if (item.TinhTrangGiaoHang == Constants.STATUS_SHIP_SUCCESSFUL)
+                                                                {
+                                                                    message = MessageContants.STATUS_SHIP_SUCCESSFUL;
+                                                                }
+                                                                else if (item.TinhTrangGiaoHang == Constants.STATUS_SHIP_IN_PROCCESING)
+                                                                {
+                                                                    message = MessageContants.STATUS_SHIP_IN_PROCCESING;
+                                                                }
+                                                                else if (item.TinhTrangGiaoHang == Constants.STATUS_SHIP_FAIL)
+                                                                {
+                                                                    message = MessageContants.STATUS_SHIP_FAIL;
+                                                                }
+                                                                else if (item.TinhTrangGiaoHang == Constants.STATUS_SHIP_BOOM)
+                                                                {
+                                                                    message = MessageContants.STATUS_SHIP_BOOM;
+                                                                }
+                                                            }
+                                                            <td><span class="badge bg-green">@message</span></td> 
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane animated flipInX" id="messages_animation_1">
+                                    <b>Message Content</b>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
+                                        aliquid pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere
+                                        gubergren sadipscing mel.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/content-->
+</section>
+
+<script src="~/assets/js/buttons/libscripts.bundle.js"></script>
+<script src="~/assets/js/buttons/vendorscripts.bundle.js"></script>
+<script src="~/assets/js/buttons/datatablescripts.bundle.js"></script>
+<script src="~/assets/js/buttons/jquery-datatable.js"></script>
+<script type="text/javascript" charset="utf8">
+    $(document).ready(function () {
+        setTimeout(function () {
+            var listButton = $('.dataTables_length').find('button');
+            listButton.each(function () {
+                $(this).remove();
+            });
+        }, 500);
+    });
+</script>
+<style>
+    .well.well-sm {
+        padding: 9px;
+        border-radius: 3px;
+        background-color: #f5f5f5;
+        border: 1px solid #e3e3e3;
+        width: auto;
+        margin-left: 15px;
+    }
+
+    h4 {
+        font-weight: normal;
+        text-decoration: underline;
+        padding: 0 6px;
+    }
+
+    h5 {
+        margin: auto
+    }
+
+    a.btn.btn-raised.bg-light-blue.waves-effect {
+        border-radius: 5px;
+        padding: 10px 13px 8px 10px;
+    }
+
+    .icon-button-demo {
+        margin-left: 180px;
+    }
+</style>

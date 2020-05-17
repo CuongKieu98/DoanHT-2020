@@ -1,0 +1,338 @@
+﻿@model HTFood.Models.Cuahang
+@using HTFood.Models
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<script src="~/assets/js/chartjs/jquery.min.js"></script>
+<script src="~/assets/js/chartjs/Chart.bundle.min.js"></script>
+<script src="~/assets/js/chartjs/Chart.min.js"></script>
+<link href="~/assets/js/chartjs/Chart.min.css" rel="stylesheet" />
+<!-- Custom Css -->
+
+
+<title>
+    Thông tin:
+    @Html.DisplayFor(model => model.TenCH)
+</title>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <!--Header-->
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-7">
+                    <h2>Thông tin cửa hàng</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Cuahang")">Cửa hàng</a> </li>
+                        <li class="breadcrumb-item active"> @Html.DisplayFor(model => model.TenCH)</li>
+                    </ul>
+                </div>
+            </div>
+            <!--/Header-->
+
+            <div>
+
+                <hr />
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="card widget-stat">
+                            <div class="body">
+                                <div class="media">
+                                    <div class="media-icon bg-cyan">
+                                        <a href="@Url.Action("Index","DonDatHang")" style="color:#fff"><i class="zmdi zmdi-shopping-basket zmdi-hc-2x"></i></a>
+                                    </div>
+                                    <div class="media-text">
+                                        <span class="title">Đơn hàng cửa hàng:</span>
+                                        <span class="value">@ViewBag.CountOrder</span>
+                                    </div>
+                                </div>
+                                <p class="media-footer text-success">
+                                    <i class="zmdi zmdi-trending-up"></i> 13%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="card widget-stat">
+                            <div class="body">
+                                <div class="media">
+                                    <div class="media-icon bg-amber">
+                                        <a href="@Url.Action("Index","Khuyenmai")" style="color:#fff"> <i class="zmdi zmdi-account-o zmdi-hc-2x"></i></a>
+                                    </div>
+                                    <div class="media-text">
+                                        <span class="title">Khuyến mãi:</span>
+                                        <span class="value">@ViewBag.CountSale</span>
+                                    </div>
+                                </div>
+                                <p class="media-footer text-success">
+                                    <i class="zmdi zmdi-trending-up"></i> 18%
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="card widget-stat">
+                            <div class="body">
+                                <div class="media">
+                                    <div class="media-icon bg-green">
+                                        <i class="zmdi zmdi-money zmdi-hc-2x"></i>
+                                    </div>
+                                    <div class="media-text">
+                                        <span class="title">Doanh thu cửa hàng:</span>
+
+                                    </div>
+                                </div>
+                                <p class="media-footer text-success">
+                                    <i class="zmdi zmdi-trending-up"></i> 21%
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="card widget-stat">
+                            <div class="body">
+                                <div class="media">
+                                    <div class="media-icon bg-blue">
+                                        <a href="@Url.Action("Index","DanhMucDoAn")" style="color:#fff"><i class="zmdi zmdi-menu zmdi-hc-2x"></i></a>
+                                    </div>
+                                    <div class="media-text">
+                                        <span class="title">Danh mục đồ ăn:</span>
+                                        <span class="value">@ViewBag.CountMenu</span>
+                                    </div>
+                                </div>
+                                <p class="media-footer text-danger">
+                                    <i class="zmdi zmdi-trending-down"></i> 12%
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <div class="card">
+
+                            <div class="body">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#home_with_icon_title"> <i class="material-icons">home</i> @Html.DisplayFor(model => model.TenCH) </a></li>
+
+
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane in active show" id="home_with_icon_title">
+                                        <b>Danh mục sản phẩm của cửa hàng:</b>
+                                        <p>
+                                            <div class="body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>No.</th>
+                                                                <th>Loại sản phẩm</th>
+
+
+                                                                <th>Thao tác</th>
+                                                                <th>Chi tiết</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>No.</th>
+                                                                <th>Loại sản phẩm</th>
+
+
+                                                                <th>Thao tác</th>
+                                                                <th>CHi tiết</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                        <tbody>
+                                                            @{int i = 1;}
+                                                            @foreach (DanhMucDoAn danhmucdoans in ViewBag.danhmuc)
+                                                            {
+
+                                                                <tr>
+                                                                    <td>@i</td>
+                                                                    <td>
+                                                                        @Html.ActionLink(danhmucdoans.TenDM, "Details", new { id = danhmucdoans.MaDM })
+                                                                    </td>
+
+
+                                                                    <td>
+                                                                        <a href="@Url.Action("Delete","DanhMucDoAn", new { id = danhmucdoans.MaDM })" title="Xóa"><i class="material-icons">delete_forever</i></a>
+                                                                    </td>
+                                                                    <td> <a href="@Url.Action("Details","DanhMucDoAn",new { id = danhmucdoans.MaDM })"><i class="material-icons">remove_red_eye</i></a></td>
+
+                                                                </tr>
+                                                                i++;
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card">
+                            <div role="tabpanel" class="tab-pane" id="profile_with_icon_title">
+                                <span class="badge bg-blue">THÔNG TIN CỬA HÀNG</span>    <a href="@Url.Action("Edit","Cuahang", new { id = Model.MaCH })" title="Thay đổi thông tin"><i class="material-icons">mode_edit</i>Chỉnh sửa</a>
+                                <p>
+                                    <dl class="dl-horizontal">
+                                        <dt>
+                                            Địa chỉ:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.DiachiCH)
+                                        </dd>
+
+                                        <dt>
+                                            Điện thoại:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.DienthoaiCH)
+                                        </dd>
+
+                                        <dt>
+                                            Giới thiệu
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.MotaCH)
+                                        </dd>
+
+
+
+
+                                    </dl>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<script src="~/assets/js/chartjs/loader.js"></script>
+<script src="~/assets/js/buttons/vendorscripts.bundle.js"></script>
+<script src="~/assets/js/buttons/datatablescripts.bundle.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    new Chart(document.getElementById("doughnut-chart").getContext("2d"), {
+        type: 'doughnut',
+        data: {
+            labels: ['Đã xác nhận','Đang giao hàng','Shipper đã giao hàng','Boom hàng'],
+            datasets: [{
+                data: [@ViewBag.DataChart],
+                backgroundColor: [
+                    'rgba(255, 159, 64)',
+                    "rgb(54, 162, 235)",
+                    "rgb(162, 194, 58)",
+                    'rgba(255, 0, 0,0.8)'
+                ],
+                borderWidth: 2,
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Biểu đồ hiển thị chi tiết đơn đặt hàng',
+            },
+        },
+
+    });
+    //Line-chart
+    new Chart(document.getElementById("line-chart").getContext("2d"), {
+        type: 'bar',
+        data: {
+            labels: ['Đã xác nhận','Đang giao hàng','Shipper đã giao hàng','Boom hàng'],
+            datasets: [
+                {
+                    label: "Đã xác nhận",
+                    data: [@ViewBag.DataChart],
+                    backgroundColor: [
+                        "rgba(255, 159, 64)",
+                        "rgb(54, 162, 235)",
+                        "rgb(162, 194, 58)",
+                        "rgba(255, 0, 0)"
+                    ],
+                    borderWidth: 2,
+                },
+                {
+                    label: "Đang giao hàng",
+                    backgroundColor: [
+                        "rgb(54, 162, 235)",
+                    ],
+                },
+                {
+                    label: "Shipper đã giao hàng",
+                    backgroundColor: [
+                       "rgb(162, 194, 58)",
+                    ],
+                },
+                {
+                    label: "Boom hàng",
+                    backgroundColor: [
+                       "rgba(255, 0, 0)"
+                    ],
+                },
+                ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'Biểu đồ hiển thị chi tiết đơn đặt hàng',
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        },
+    });
+
+</script>
+
+<style>
+
+    .col-lg-3.col-md-3.col-sm-6 {
+        margin-top: 20px;
+        margin-bottom: -10px;
+    }
+
+    .media {
+        margin-top: 20px
+    }
+</style>
+
+
+
+
+
+

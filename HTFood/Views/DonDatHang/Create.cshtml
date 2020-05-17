@@ -1,0 +1,99 @@
+﻿@model HTFood.Models.DonDatHang
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<link href="~/assets/css/create.css" rel="stylesheet" />
+<title>Thêm mới đơn đặt hàng</title>
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <!--Header-->
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-7">
+                    <h2>Thêm mới đơn hàng</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","Admin")">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","DonDatHang")">Đơn đặt hàng</a></li>
+                        <li class="breadcrumb-item active">Thêm mới đơn hàng</li>
+                    </ul>
+
+                </div>
+            </div>
+            <!--/Header-->
+            <!--content-->
+            @using (Html.BeginForm(new { @enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row clearfix">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="userbox">
+                                <div class="header">
+                                    <h2>Thêm mới </h2>
+                                    <ul class="header-dropdown m-r--5">
+                                        <li class="dropdown">
+                                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                            <ul class="dropdown-menu pull-right">
+                                                <li><a href="javascript:void(0);">Action</a></li>
+                                                <li><a href="javascript:void(0);">Another action</a></li>
+                                                <li><a href="javascript:void(0);">Something else</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="body">
+                                    <h2 class="card-inside-title">Nhập thông tin đơn hàng mới</h2>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field"></label><br>
+                                        <input type="text" value="" name="TinhTrangDonHang" placeholder="Tình trạng đơn hàng" class="text" size="30" />
+                                    </div>
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field" style="color: black;font-weight: bold">Ngày đặt</label><br>
+                                        <input type="datetime-local" value="" name="NgayDat" class="datetime" />
+                                    </div>
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field" style="color: black;font-weight: bold">Ngày giao</label><br>
+                                        <input type="datetime-local" value=""  name="NgayGiao" class="datetime" />
+                                    </div>
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field"></label><br>
+                                        <input type="number" value="" placeholder="Thời gian giao" name="TgGiao" class="text" size="30" />
+                                    </div>
+                                    <div id="email" class="clearfix large_form">
+                                        <label class="label icon-field"></label><br>
+                                        <input type="text" value="" placeholder="Mã khách hàng" name="MaKH" class="text" size="30" />
+                                    </div>
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field"></label><br>
+                                        <input type="text" value="" name="MaNV" placeholder="Mã nhân viên" class="text" size="30" />
+                                        @*@Html.DropDownList("MaKH")*@
+                                    </div>
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field"></label><br>
+                                        <input type="text" value="" name="MaVT" placeholder="Mã vị trí" class="text" size="30" />
+
+                                    </div>
+                                    <div class="clearfix large_form">
+                                        <div class="col-sm-12 ">
+                                            <div class="demo-google-material-icon">
+                                                <input class="btn btn-raised bg-light-blue waves-effect" type="submit" value="Thêm mới" />
+                                                <a style="padding-left:15px" href="@Url.Action("Index","DonDatHang")">Quay lại </a><span class="icon-name"><i class="material-icons">keyboard_return</i></span>
+                                            </div>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/content-->
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+

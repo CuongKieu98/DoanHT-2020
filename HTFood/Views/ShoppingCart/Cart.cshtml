@@ -1,0 +1,55 @@
+﻿@using HTFood.Controllers
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+
+                        <thead>
+                            <tr>
+
+                                <th>Ten Sp</th>
+                                <th>Đơn giá</th>
+                                <th>Số lượng</th>
+
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+
+                                <th>Số lượng</th>
+
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+                            @foreach (var cart in (List<Item>)Session["cart"])
+                            {
+
+                                <tr>
+                               
+                                   <td>@cart.iMaDA</td>
+                                    <td>@cart.sTenDA </td>
+
+                                    <td>@cart.Quantity</td>
+
+
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
