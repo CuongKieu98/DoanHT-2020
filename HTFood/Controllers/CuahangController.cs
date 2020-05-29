@@ -42,6 +42,7 @@ namespace HTFood.Controllers
             }
             return View("Error");
         }
+
         public static List<Cuahang> getAllCuaHang(HttpResponseMessage responseMessage)
         {
             if (responseMessage.IsSuccessStatusCode)
@@ -78,7 +79,13 @@ namespace HTFood.Controllers
                 danhmucdoans = danhmucdoans.Where(n => n.MaCH == id).ToList();
                 ViewBag.danhmuc = danhmucdoans;
                 ViewBag.CountMenu = danhmucdoans.Count;
+                responseMessage = await client.GetAsync(url + @"Doan");
+                List<DoAn> listda = DoAnController.getAllDoAn(responseMessage);
+                listda = listda.Where(n => n.MaDM == id).ToList();
+                ViewBag.doan = listkm;
+                ViewBag.CountDoan = listda.Count;
                 //lấy khuyến mãi của cửa hàng ->>>
+
                 responseMessage = await client.GetAsync(url + @"Khuyenmai/");             
                 List<Khuyenmai> listkm = KhuyenmaiController.getAllKhuyenmai(responseMessage);
                 listkm = listkm.Where(n => n.MaCH == id).ToList();

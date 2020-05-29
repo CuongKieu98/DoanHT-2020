@@ -4,7 +4,8 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-  
+
+
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <link href="~/assets/css/create.css" rel="stylesheet" />
 <title>Thêm mới đồ ăn</title>
@@ -48,13 +49,15 @@
                                 <div class="body">
                                     <h2 class="card-inside-title">Nhập thông tin đồ ăn mới</h2>
                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="clearfix large_form">
-                                    <label class="label icon-field"></label><br>
-                                    <input type="text" value="" name="TenDA" placeholder="Tên đồ ăn" class="text" />
-                                </div>
+                                    <div class="clearfix large_form">
+                                        <label class="label icon-field"></label><br>
+                                        
+                                        <input type="text" value="" name="TenDA" placeholder="Tên đồ ăn" class="text" />
+                                    </div>
                                     <div class="clearfix large_form">
                                         <label class="label icon-field" style="color: black;font-weight: bold">Ngày cập nhật</label><br>
-                                        <input type="date" value="" name="NgayCapNhat" class="datetime" />
+                                        <input type="text" class="datepicker form-control" placeholder="Please choose a date..." data-dtp="dtp_VhFEb">
+                                        @*<input type="text" value="" name="NgayCapNhat" class="datepicker form-control" />*@
                                     </div>
                                     <div class="clearfix large_form">
                                         <label class="label icon-field"></label><br>
@@ -74,7 +77,7 @@
                                         </div>
                                     </div>
                                     <div class="clearfix large_form">
-                                        <label class="label icon-field" style="color: black;font-weight: bold">Mô tả</label><br>                                       
+                                        <label class="label icon-field" style="color: black;font-weight: bold">Mô tả</label><br>
                                         <div id="input-text">
                                             <textarea name="Mota" type="text" class="text"></textarea>
                                         </div>
@@ -93,7 +96,9 @@
                                     </div>
                                     <div class="clearfix large_form">
                                         <label class="label icon-field"></label><br>
-                                        <input type="text" value="" name="MaDM" placeholder="Mã danh mục" class="text" size="30" />
+
+                                        <input type="text" id="searchInput" value="" name="MaDM" placeholder="Mã danh mục" class="text" size="30" />
+                                   
                                     </div>
                                     <div class="clearfix large_form">
                                         <div class="col-sm-12 ">
@@ -114,10 +119,26 @@
         </div>
     </div>
 </section>
+
+    @*// Add the following code if you want the name of the file appear on select*@
+
+
+
 <script>
-    // Add the following code if you want the name of the file appear on select
+ 
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
+</script>
+
+<script src="~/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<script>
+    $("#searchInput").autocomplete({
+        source: function (request, responese) {
+            $.ajax({
+                url:'@Url.Action()'
+            })
+        }
+    })
 </script>

@@ -1,5 +1,6 @@
 ﻿@model HTFood.Models.Khuyenmai
 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -80,7 +81,7 @@
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input class="form-control" id="MaCH" name="MaCH" type="number" value="" placeholder="Cửa hàng..">
-                                        @* @Html.DropDownList("MaCH")*@
+                                 
                                         @Html.ValidationMessageFor(model => model.MaCH, "", new { @class = "text-danger" })
 
                                     </div>

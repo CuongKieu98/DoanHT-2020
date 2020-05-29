@@ -118,22 +118,32 @@
                 <div class="row clearfix">
                     <div class="col-lg-8 col-md-8 col-sm-8">
                         <div class="card">
-
                             <div class="body">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#home_with_icon_title"> <i class="material-icons">home</i> @Html.DisplayFor(model => model.TenCH) </a></li>
-
-
+                                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#home_with_icon_title"> <i class="material-icons">home</i> HOME </a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#profile_with_icon_title"><i class="material-icons">restaurant_menu</i>Danh mục <span class="value">@ViewBag.CountMenu</span> </a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#messages_with_icon_title"><i class="material-icons">email</i> MESSAGES </a></li>
                                 </ul>
 
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane in active show" id="home_with_icon_title">
-                                        <b>Danh mục sản phẩm của cửa hàng:</b>
+                                        <b>Home Content</b>
                                         <p>
-                                            <div class="body">
-                                                <div class="table-responsive">
+                                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                                            sadipscing mel.
+                                        </p>
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="profile_with_icon_title">
+                                        <b>Sản phẩm thuộc cửa hàng:</b>
+                                        <p>
+                                        <p>
+                                         
+                                            <div class="table-responsive">
+                                                <div class="body">
                                                     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
 
                                                         <thead>
@@ -181,12 +191,20 @@
                                                 </div>
                                             </div>
                                         </p>
+                                        </p>
                                     </div>
-
+                                    <div role="tabpanel" class="tab-pane" id="messages_with_icon_title">
+                                        <b>Message Content</b>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                                            sadipscing mel.
+                                        </p>
+                                    </div>
                                 </div>
-
-
                             </div>
+               
                         </div>
                     </div>
                     <div class="col-4">
@@ -235,6 +253,7 @@
     </div>
 </section>
 <script src="~/assets/js/chartjs/loader.js"></script>
+<script src="~/assets/js/buttons/libscripts.bundle.js"></script>
 <script src="~/assets/js/buttons/vendorscripts.bundle.js"></script>
 <script src="~/assets/js/buttons/datatablescripts.bundle.js"></script>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -330,7 +349,16 @@
         margin-top: 20px
     }
 </style>
-
+<script type="text/javascript" charset="utf8">
+    $(document).ready(function () {
+        setTimeout(function () {
+            var listButton = $('.dataTables_length').find('button');
+            listButton.each(function () {
+                $(this).remove();
+            });
+        }, 500);
+    });
+</script>
 
 
 

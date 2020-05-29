@@ -141,6 +141,7 @@
     <Compile Include="Controllers\DanhMucDoAnController.cs" />
     <Compile Include="Controllers\DoAnController.cs" />
     <Compile Include="Controllers\DonDatHangController.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Item.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\Constants.cs" />
     <Compile Include="Models\HutechFood.cs" />
     <Compile Include="Models\MessageContants.cs" />
@@ -204,6 +206,8 @@
     <Content Include="assets\js\chartjs\Chart.min.js" />
     <Content Include="assets\js\chartjs\jquery.min.js" />
     <Content Include="assets\js\chartjs\loader.js" />
+    <Content Include="assets\plugins\bootstrap-material-datetimepicker\css\bootstrap-material-datetimepicker.css" />
+    <Content Include="assets\plugins\bootstrap-material-datetimepicker\js\bootstrap-material-datetimepicker.js" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap.css" />
     <Content Include="assets\plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -244,6 +248,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="tinymce\changelog.txt" />
     <Content Include="tinymce\js\tinymce\jquery.tinymce.min.js" />
     <Content Include="tinymce\js\tinymce\license.txt" />
@@ -403,6 +409,8 @@
     <Content Include="tinymce\js\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\GioHang\Index.cshtml" />
+    <Content Include="Views\Cuahang\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
