@@ -82,7 +82,7 @@ namespace HTFood.Controllers
                 responseMessage = await client.GetAsync(url + @"Doan");
                 List<DoAn> listda = DoAnController.getAllDoAn(responseMessage);
                 listda = listda.Where(n => n.MaDM == id).ToList();
-                ViewBag.doan = listkm;
+                ViewBag.doan = listda;
                 ViewBag.CountDoan = listda.Count;
                 //lấy khuyến mãi của cửa hàng ->>>
 

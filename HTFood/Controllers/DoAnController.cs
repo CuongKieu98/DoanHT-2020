@@ -74,6 +74,7 @@ namespace HTFood.Controllers
         // GET: DoAn/Create
         public ActionResult Create()
         {
+            ViewBag.MaDM = new SelectList(db.DanhMucDoAns.ToList().OrderBy(n => n.TenDM), "MaDM", "TenDM");
             return View();
         }
 
@@ -85,6 +86,7 @@ namespace HTFood.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DoAn doAn, HttpPostedFileBase fileupload)
         {
+
             if (fileupload == null)
             {
                 ViewBag.Thongbao = "Vui lòng chọn ảnh";
@@ -113,8 +115,12 @@ namespace HTFood.Controllers
                     //Luu vao CSDL
                     db.DoAns.Add(doAn);
                     db.SaveChanges();
+                    ViewBag.MaDM = new SelectList(db.DanhMucDoAns.ToList().OrderBy(n => n.TenDM), "MaDM", "TenDM");
+                    ViewBag.doan = listda;
+                    ViewBag.CountDoan = listda.Count;
                     HttpResponseMessage response = client.PostAsJsonAsync(url + @"doan/", doAn).Result;
                     response.EnsureSuccessStatusCode();
+                   
                 }
                 return RedirectToAction("Index");
             }
