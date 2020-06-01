@@ -49,6 +49,7 @@ namespace HTFood.Models
         [Key]
         public int MaDA { get; set; }
         public string TenDA { get; set; }
+      
         //[DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Currency)]
         public decimal DonGia { get; set; }

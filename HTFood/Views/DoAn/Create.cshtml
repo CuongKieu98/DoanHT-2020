@@ -52,13 +52,14 @@
                                     <div class="col col-4">
                                         <label class="label icon-field" style="color: white;background-color:#007bff; font-weight: bold">Tên sản phẩm:</label><br>
                                         <input type="text" value="" name="TenDA" placeholder="Tên đồ ăn" class="text" />
+                                        @Html.ValidationMessageFor(model=> model.TenDA)
                                     </div>
                                     <div class="col col-4">
                                         <label class="label icon-field" style="color: white;background-color:#007bff; font-weight: bold">Ngày cập nhật:</label><br>
                                         <input type="date" value="" name="NgayCapNhat" class="datetime" />
                                     </div>
                                     <div class="col col-4">
-                                        <label class="label icon-field" style="color: white;background-color:#007bff; bold">Avatar</label> <c style="color:red; text-decoration:underline">@ViewBag.Thongbao</c><br>
+                                        <label class="label icon-field" style="color: white;background-color:#007bff;font-weight: bold">Avatar</label> <c style="color:red; text-decoration:underline">@ViewBag.Thongbao</c><br>
                                         <div class="input-group" style="margin: 15px 0px;">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroupFileAddon01">Tải lên</span>
@@ -118,7 +119,7 @@
                                         <div class="col-sm-12 ">
                                             <div class="demo-google-material-icon">
                                                 <input class="btn btn-raised bg-light-blue waves-effect" type="submit" value="Thêm mới" />
-                                                <a style="padding-left:15px" href="@Url.Action("Index","DonDatHang")">Quay lại </a><span class="icon-name"><i class="material-icons">keyboard_return</i></span>
+                                                <a style="padding-left:15px" href="@Url.Action("Index","DoAn")">Quay lại </a><span class="icon-name"><i class="material-icons">keyboard_return</i></span>
                                             </div>
                                         </div>
                                     </div>
@@ -138,5 +139,12 @@
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+<script>
+    $(function () {
+        var successMessage = '@TempData["AlertMessage"]'
+        if (successMessage != '')
+            sweetalert.success()
     });
 </script>

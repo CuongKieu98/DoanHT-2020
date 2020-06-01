@@ -119,8 +119,13 @@ namespace HTFood.Controllers
                     ViewBag.doan = listda;
                     ViewBag.CountDoan = listda.Count;
                     HttpResponseMessage response = client.PostAsJsonAsync(url + @"doan/", doAn).Result;
+
                     response.EnsureSuccessStatusCode();
-                   
+                    SetAlert("Thêm sản phẩm thành công!!!", "success");
+
+
+
+
                 }
                 return RedirectToAction("Index");
             }
@@ -172,9 +177,35 @@ namespace HTFood.Controllers
         // GET: DoAn/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            //LOI: XOA DC NHUNG CHUA XOA IMAGES TRONG PROJECT
             HttpResponseMessage response = await client.DeleteAsync(url + @"doan/" + id);
-            return RedirectToAction("Index", "DoAn");
+            if (response.IsSuccessStatusCode)
+            {
+                SetAlert("Xóa thành công!!!", "success");
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                SetAlert("Có lổi xảy ra!!!", "error");
+
+            }
+            return RedirectToAction("Index", "Doan");
+        }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert bg-green";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
+
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
         }
 
         //// POST: DoAn/Delete/5

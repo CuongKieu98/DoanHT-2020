@@ -9,10 +9,13 @@
 <link href="~/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
 <title>Danh sách sản phẩm</title>
+
 <section class="content">
     <div class="container-fluid">
         <div class="block-header">
             <!--Header-->
+
+
             <div class="row">
                 <div class="col-lg-12 col-md-6 col-sm-7">
                     <h2>Sản phẩm</h2>
@@ -22,6 +25,14 @@
                     </ul>
                 </div>
             </div>
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="AlertBox" class="alert @TempData["AlertType"] hidden">
+
+                    <strong>@TempData["AlertMessage"]</strong>
+                </div>
+
+            }
             <!--/Header-->
             <!--HHH-->
             <div class="row clearfix">
@@ -43,7 +54,13 @@
                         <div class="body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                          
+
+
+                                    <h7>
+                                        @Html.ActionLink("Thêm mới sản phẩm", "Create")
+                                    </h7>
+
+
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -94,7 +111,7 @@
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.TrangThaiDA)
                                                     @*<a href="#" >@(item.TrangThaiDA ? "Mở bán" : "Đóng")</a>*@
-                                                 
+
                                                 </td>
                                                 <td>
                                                     @(((DateTime)item.NgayCapNhat).ToString("dd-MMM-yyyy"))
@@ -136,3 +153,5 @@
         }, 500);
     });
 </script>
+
+

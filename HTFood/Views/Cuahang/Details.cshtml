@@ -129,12 +129,19 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane in active show" id="home_with_icon_title">
-                                        <b>Home Content</b>
+                                        <b>Đơn hàng</b>
                                         <p>
-                                            Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                            Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                            pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                            sadipscing mel.
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12 col-md-4">
+                                                    <div class="card">
+                                                     
+                                                        <div class="body">
+                                                            <canvas id="doughnut-chart" width="300" height="400"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        
+                                            </div>
                                         </p>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="profile_with_icon_title">
@@ -255,6 +262,7 @@
 <script src="~/assets/js/buttons/vendorscripts.bundle.js"></script>
 <script src="~/assets/js/buttons/datatablescripts.bundle.js"></script>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/assets/js/chartjs/loader.js"></script>
 <script>
     new Chart(document.getElementById("doughnut-chart").getContext("2d"), {
         type: 'doughnut',
@@ -332,7 +340,6 @@
                 }]
             }
         },
-
     });
 
 </script>

@@ -155,7 +155,23 @@ namespace HTFood.Controllers
             HttpResponseMessage response = await client.DeleteAsync(url + @"cuahang/" + id);
             return RedirectToAction("Index", "CuaHang");
         }
+        protected void SetAlert(string message, string type)
+        {
+            TempData["AlertMessage"] = message;
+            if (type == "success")
+            {
+                TempData["AlertType"] = "alert bg-green";
+            }
+            else if (type == "warning")
+            {
+                TempData["AlertType"] = "alert-warning";
 
+            }
+            else if (type == "error")
+            {
+                TempData["AlertType"] = "alert-danger";
+            }
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

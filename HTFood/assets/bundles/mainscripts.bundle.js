@@ -21,7 +21,10 @@ function setSkinListHeightAndScroll() {
         railBorderRadius: "3px"
     })
 }
-
+function () {
+    $('#AlertBox').removeClass('hidden');
+    $('#AlertBox').delay(1000).slideUp(500);
+};
 function setSkinListHeightAndScroll() {
     var a = $(window).height() - ($(".navbar").innerHeight() + $(".sidebar .user-info").outerHeight()),
         b = $(".sidebar .menu");
